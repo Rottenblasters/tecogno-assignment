@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Header, Icon, Dropdown } from "semantic-ui-react";
+import { Grid, Header, Icon } from "semantic-ui-react";
 
 class UserPanel extends React.Component {
   state = {
@@ -26,8 +26,6 @@ class UserPanel extends React.Component {
   ];
 
   render() {
-    const { employee } = this.state;
-
     return (
       <Grid>
         <Grid.Column>

@@ -12,7 +12,7 @@ const customer_reducer = (state = initialUserState, action) => {
   switch (action.type) {
     case actionTypes.GET_CUSTOMER:
       return {
-        ... state,
+        ...state,
         isLoading: false,
         customers: action.payload.customers,
         currentCustomer: action.payload.customer

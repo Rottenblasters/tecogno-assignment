@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import SidePanel from "./SidePanel/SidePanel";
 import Messages from "./Messages/Messages";
+import MetaPanel from "./MetaPanel/MetaPanel"
 import { setCustomer } from "../actions";
 
 class App extends React.Component {
@@ -32,6 +33,9 @@ class App extends React.Component {
           </GridColumn>
           <Grid.Column width={8}>
             <Messages />
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <MetaPanel />
           </Grid.Column>
         </Grid.Row>
       </Grid>
