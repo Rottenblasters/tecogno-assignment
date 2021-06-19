@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import MessagesHeader from "./MessagesHeader";
 import MessageForm from "./MessageForm";
-import Skeleton from "./Skeleton";
 
 class Messages extends React.Component {
   state = {
@@ -43,15 +42,6 @@ class Messages extends React.Component {
         </Comment.Content>
       </Comment>
     ));
-
-  displayMessageSkeleton = (loading) =>
-    loading ? (
-      <React.Fragment>
-        {[...Array(10)].map((_, i) => (
-          <Skeleton key={i} />
-        ))}
-      </React.Fragment>
-    ) : null;
 
   render() {
     const { messages, customer } = this.state;

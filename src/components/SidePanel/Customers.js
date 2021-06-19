@@ -54,14 +54,14 @@ class Customers extends React.Component {
               onClick={this.getResolved}
               content="Resolved"
               labelPosition="left"
-              icon="edit"
+              icon="checkmark"
             />
             <Button
               color="teal"
               onClick={this.getUnresolved}
               content="Unresolved"
               labelPosition="right"
-              icon="cloud upload"
+              icon="cancel"
             />
           </Button.Group>
         </Menu.Item>

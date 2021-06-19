@@ -44,7 +44,7 @@ class MessagesHeader extends React.Component {
               color="red"
               inverted
             >
-              <Icon name="checkmark" /> Unresolve
+              <Icon name="cancel" /> Unresolve
             </Button>
           )}
         </Header>
