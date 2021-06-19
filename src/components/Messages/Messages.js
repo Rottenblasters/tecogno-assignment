@@ -4,27 +4,44 @@ import { connect } from "react-redux";
 
 import MessagesHeader from "./MessagesHeader";
 import MessageForm from "./MessageForm";
-import Message from "./Message";
 import Skeleton from "./Skeleton";
-
 
 class Messages extends React.Component {
   state = {
     customer: this.props.currentCustomer,
-    messages: []
+    messages: [],
   };
 
   componentDidMount() {
-    this.setState({ customer: this.props.currentCustomer, messages: this.props.currentCustomer.messages });
+    this.setState({
+      customer: this.props.currentCustomer,
+      messages: this.props.currentCustomer.messages,
+    });
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currentCustomer.id !== this.props.currentCustomer.id) {
+      this.setState({
+        customer: this.props.currentCustomer,
+        messages: this.props.currentCustomer.messages,
+      });
+    }
+  }
+
+  isOwnMessage = (sender) => {
+    return sender === "employee" ? "message__self" : "";
+  };
 
   displayMessages = (messages) =>
     messages.length > 0 &&
     messages.map((message) => (
-      <Message
-        key={message.timeStamp}
-        message={message}
-      />
+      <Comment key={message.timeStamp}>
+        <Comment.Content className={this.isOwnMessage(message.sender)}>
+          <Comment.Author as="a">{message.sender}</Comment.Author>
+          <Comment.Metadata>{message.timeStamp}</Comment.Metadata>
+          <Comment.Text>{message.content}</Comment.Text>
+        </Comment.Content>
+      </Comment>
     ));
 
   displayMessageSkeleton = (loading) =>
@@ -37,14 +54,11 @@ class Messages extends React.Component {
     ) : null;
 
   render() {
-
     const { messages, customer } = this.state;
 
     return (
       <React.Fragment>
-        <MessagesHeader
-          currentCustomer = {customer}
-        />
+        <MessagesHeader currentCustomer={customer} />
 
         <Segment>
           <Comment.Group className="messages">
@@ -52,18 +66,15 @@ class Messages extends React.Component {
           </Comment.Group>
         </Segment>
 
-        <MessageForm
-          customer = {customer}
-        />
+        <MessageForm customer={customer} />
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   customers: state.customerData.customers,
-  currentCustomer: state.customerData.currentCustomer
+  currentCustomer: state.customerData.currentCustomer,
 });
-
 
 export default connect(mapStateToProps, {})(Messages);

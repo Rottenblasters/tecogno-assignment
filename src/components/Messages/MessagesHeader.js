@@ -11,6 +11,15 @@ class MessagesHeader extends React.Component {
     this.setState({ status: this.state.customer.status });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currentCustomer.id !== this.props.currentCustomer.id) {
+      this.setState({
+        customer: this.props.currentCustomer,
+        status: this.props.currentCustomer.status,
+      });
+    }
+  }
+
   render() {
     const { status, customer } = this.state;
 
